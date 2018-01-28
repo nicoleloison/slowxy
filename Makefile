@@ -23,13 +23,11 @@ ts:	gcc $(CFLAGS) $(OPTFLAGS) -o tcpserver tcpserver.c $(LDFLAGS)
 tc:	gcc $(CFLAGS) $(OPTFLAGS) -o tcpclient tcpclient.c $(LDFLAGS)
 	./tcpclient $(PORT)
 	
-s:
-	gcc $(CFLAGS) $(OPTFLAGS) -o server server.c $(LDFLAGS)
-	./server $(PORT)
-c:
-	gcc $(CFLAGS) $(OPTFLAGS) -o client client.c $(LDFLAGS)	
-	./client
+p:
+	gcc $(CFLAGS) $(OPTFLAGS) -o proxy proxy1.c $(LDFLAGS)
+	./proxy $(PORT)
+
 clean:
-	rm -f server client server.exe client.exe micro_proxy *.o core core.* *.core
+	rm -f server proxy server.exe client.exe micro_proxy *.o core core.* *.core
 
 

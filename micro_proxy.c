@@ -42,7 +42,7 @@
 
 
 #define SERVER_NAME "micro_proxy"
-#define SERVER_URL "http://www.acme.com/software/micro_proxy/"
+#define SERVER_URL "136.159.228.189"
 #define PROTOCOL "HTTP/1.0"
 #define RFC1123FMT "%a, %d %b %Y %H:%M:%S GMT"
 #define TIMEOUT 300
