@@ -49,19 +49,19 @@ int main(int argc,char* argv[])
     if(sockfd<0)
         error("Problem in initializing socket");
     
-    //bind
+    /*bind*/
     if(bind(sockfd, (struct sockaddr *)&server, sizeof(server)) < 0)
     {
         perror("bind failed");
         exit(1);
     }
     
-    //listen
+    /*listen*/
     listen(sockfd,50);
     int client_length=sizeof(cli_addr);
     printf("\nReady for request.\n");
     
-    //acceptance
+    /*acceptance*/
 accepting:
     
     newsockfd=accept(sockfd,(struct sockaddr*)&cli_addr,&client_length);
@@ -81,16 +81,16 @@ accepting:
         
         sscanf(buffer,"%s %s %s %s",t1,t2,t3, setting);
         
-        //structure of GET request
+        /*structure of GET request*/
         if(((strncmp(t1,"GET",3)==0))&&((strncmp(t3,"HTTP/1.1",8)==0)||(strncmp(t3,"HTTP/1.0",8)==0))&&(strncmp(t2,"http://",7)==0))
         {
-             //normal setting
+             /*normal setting*/
             if(strncmp(setting,"normal",6)==0)
-            {
-                //message writing that the GET request has been accepted and get request starting
+            *
+                /*message writing that the GET request has been accepted and get request starting*/
                 printf("\nGET request valid and starting.\n");
                 
-                strcpy(t1,t2);//t1=GET , t2=url, put url in t1
+                strcpy(t1,t2);/*t1=GET , t2=url, put url in t1*/
                 
                 flag=0;
                 
@@ -136,7 +136,7 @@ accepting:
                 memset((char*)&host_addr, '\0', sizeof(host_addr));
                 host_addr.sin_port=htons(port);
                 host_addr.sin_family=AF_INET;
-                //try and replace bccopy(depreciated in most OS)
+                /*try and replace bccopy(depreciated in most OS)*/
                 bcopy((char*)host->h_addr,(char*)&host_addr.sin_addr.s_addr,host->h_length);
                 
                 sockfd1=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
@@ -146,7 +146,6 @@ accepting:
                     error("404 : PAGE NOT FOUND\n");
                 
                 printf("\n%s\n",buffer);
-                //send(newsockfd,buffer,strlen(buffer),0);
                 
                 memset((char*)buffer, '\0', sizeof(buffer));
                 if(temp!=NULL){
@@ -172,13 +171,13 @@ accepting:
 
             }
             
-            //slow setting:
-            else if (strncmp(setting,"slow",4)==0) //slow setting
+            /*slow setting*/
+            else if (strncmp(setting,"slow",4)==0) 
             {
-                //message writing that the GET request has been accepted and get request starting
+                /*message writing that the GET request has been accepted and get request starting*/
                 printf("\nGET request valid and starting.\n");
                 
-                strcpy(t1,t2);//t1=GET , t2=url, put url in t1
+                strcpy(t1,t2);/*t1=GET , t2=url, put url in t1*/
                 
                 flag=0;
                 
@@ -224,7 +223,7 @@ accepting:
                 memset((char*)&host_addr, '\0', sizeof(host_addr));
                 host_addr.sin_port=htons(port);
                 host_addr.sin_family=AF_INET;
-                //try and replace bccopy(depreciated in most OS)
+               
                 bcopy((char*)host->h_addr,(char*)&host_addr.sin_addr.s_addr,host->h_length);
                 
                 sockfd1=socket(AF_INET,SOCK_STREAM,IPPROTO_TCP);
@@ -234,7 +233,7 @@ accepting:
                     error("404 : PAGE NOT FOUND\n");
                 
                 printf("\n%s\n",buffer);
-                //send(newsockfd,buffer,strlen(buffer),0);
+                /*send(newsockfd,buffer,strlen(buffer),0);*/
                 
                 memset((char*)buffer, '\0', sizeof(buffer));
                 if(temp!=NULL)
@@ -252,7 +251,7 @@ accepting:
                     {
                         printf("200: OK./n");
                        
-                        //slowed down receiving mesg, 150 char by 150 char
+                        /*slowed down receiving mesg, 150 char by 150 char*/
                         memset((char*)buffer, '\0', 150);
                         n=recv(sockfd1,buffer,150,0);
                         if(!(n<=0))
@@ -263,8 +262,6 @@ accepting:
             }
         }
 
-
-        //if the command is not structured as a proper GET Request
         else
         {
             send(newsockfd,"400 : BAD REQUEST\nONLY HTTP REQUESTS ALLOWED",18,0);
