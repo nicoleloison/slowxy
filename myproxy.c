@@ -85,8 +85,7 @@ accepting:
         if(((strncmp(t1,"GET",3)==0))&&((strncmp(t3,"HTTP/1.1",8)==0)||(strncmp(t3,"HTTP/1.0",8)==0))&&(strncmp(t2,"http://",7)==0))
         {
              /*normal setting*/
-            if(strncmp(setting,"normal",6)==0)
-            *
+            if(strncmp(setting,"normal",6)==0){
                 /*message writing that the GET request has been accepted and get request starting*/
                 printf("\nGET request valid and starting.\n");
                 
